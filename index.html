@@ -1,19 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <h1>Welcome to My Website</h1>
-    <nav>
-      <a href="career.html">Career</a>
-      <a href="fkamysterious.html">Sounds</a>
-      <a href="random.html">Random Ideas</a>
-    </nav>
-    <p>Intro and description</p>
-  </body>
-</html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Avery Black</title>
+<meta name="description" content="Avery Black — building things. Some of them helpful. Some of them for fun." />
+<meta property="og:title" content="Avery Black" />
+<meta property="og:description" content="Building things. Some of them helpful. Some of them for fun." />
+<meta property="og:type" content="website" />
 
+<style>
+  :root{
+    --paper:#FBFAF6;
+    --ink:#111111;
+    --label:#EDEAE0;
+    --rule:#111111;
+    --muted:#555248;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:#DEDBD0;
+    color:var(--ink);
+    font-family:"Times New Roman", Times, serif;
+    font-size:18px;
+    line-height:1.5;
+    padding:clamp(20px,5vw,72px);
+  }
+
+  .frame{
+    max-width:860px;
+    margin:0 auto;
+    background:var(--rule);   /* black shows through gaps as grid lines */
+    border:2px solid var(--rule);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2px;
+  }
+
+  .cell{
+    background:var(--paper);
+    padding:clamp(24px,3.5vw,40px);
+  }
+  .span2{grid-column:1 / -1;}
+
+  /* ---------- labels ---------- */
+  .label{
+    background:var(--label);
+    padding:13px clamp(24px,3.5vw,40px);
+    font-size:12.5px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:bold;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    display:flex;
+    align-items:stretch;
+    justify-content:space-between;
+    gap:18px;
+    padding:0;            /* children handle their own padding */
+  }
+  .masthead .portrait{
+    flex:0 0 auto;
+    width:clamp(96px,22vw,140px);
+    align-self:stretch;
+    background:var(--ink);
+    color:var(--paper);
+    display:grid;
+    place-items:center;
+    border-right:2px solid var(--rule);
+    overflow:hidden;
+  }
+  .masthead .portrait img{width:100%;height:100%;object-fit:cover;display:block;}
+  .masthead .portrait .monogram{
+    font-size:clamp(34px,8vw,52px);
+    font-weight:bold;
+    letter-spacing:0.04em;
+  }
+  .masthead .id{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:clamp(24px,3.5vw,40px);
+  }
+  .masthead h1{
+    margin:0;
+    font-size:clamp(32px,8vw,54px);
+    line-height:0.98;
+    font-weight:bold;
+    letter-spacing:0.01em;
+  }
+  .masthead .contact{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 22px;
+    font-size:15px;
+  }
+  .masthead .places{
+    margin-top:16px;
+    font-size:14px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .masthead .places span{display:block;}
+
+  /* ---------- tagline ---------- */
+  .tagline{
+    font-style:italic;
+    font-size:clamp(22px,5vw,36px);
+    line-height:1.22;
+    text-align:center;
+    padding:clamp(34px,6vw,60px) clamp(24px,3.5vw,40px);
+  }
+
+  /* ---------- role ---------- */
+  .role p{margin:0;font-size:clamp(18px,2.6vw,21px);line-height:1.5;}
+
+  /* ---------- generic link styling inside cells ---------- */
+  a{color:inherit;text-decoration:none;}
+  .inline-link{
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:1px;
+  }
+  .inline-link:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  /* ---------- clickable boxes: hover invert ---------- */
+  a.cell{
+    display:block;
+    transition:background .15s ease, color .15s ease;
+    position:relative;
+  }
+  a.cell .arrow{
+    position:absolute;
+    top:clamp(24px,3.5vw,40px);
+    right:clamp(24px,3.5vw,40px);
+    font-size:20px;
+  }
+  a.cell:hover{background:var(--ink);color:var(--paper);}
+  a.cell:hover .sub{color:#C9C6BC;}
+
+  .proj-name,
+  .single-name{
+    font-size:clamp(20px,3vw,26px);
+    font-weight:bold;
+    margin:0 0 6px;
+    padding-right:26px;
+  }
+  .sub{
+    margin:0;
+    font-size:16px;
+    font-style:italic;
+    color:var(--muted);
+  }
+
+  /* ---------- give ---------- */
+  .give p{margin:0 0 16px;font-size:clamp(18px,2.6vw,21px);max-width:60ch;}
+  .give .donate{
+    display:inline-block;
+    border:2px solid var(--ink);
+    padding:10px 20px;
+    font-weight:bold;
+    letter-spacing:0.04em;
+    transition:background .15s ease, color .15s ease;
+  }
+  .give .donate:hover{background:var(--ink);color:var(--paper);}
+
+  /* boxy marker */
+  .sq{display:inline-block;width:9px;height:9px;background:currentColor;margin-right:9px;vertical-align:baseline;}
+
+  a:focus-visible,.donate:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+  a.cell:focus-visible{outline-offset:-3px;}
+
+  @media (max-width:560px){
+    .frame{grid-template-columns:1fr;}
+    .span2{grid-column:1;}
+    .masthead{flex-direction:row;}
+  }
+</style>
+</head>
+
+<body>
+  <div class="frame">
+
+    <!-- ============ MASTHEAD ============ -->
+    <div class="cell masthead span2">
+      <!--
+        PROFILE PHOTO: replace the monogram <span> with:
+          <img src="your-photo.jpg" alt="Avery Black" />
+        Keep it inside .portrait. A square image works best here.
+      -->
+      <div class="portrait"><span class="monogram">AB</span></div>
+      <div class="id">
+        <h1>Avery Black</h1>
+        <div class="contact">
+          <a class="inline-link" href="https://linkedin.com/in/avery-black00" target="_blank" rel="noopener">linkedin.com/in/avery-black00</a>
+          <a class="inline-link" href="mailto:averyblack00@gmail.com">averyblack00@gmail.com</a>
+        </div>
+        <div class="places">
+          <span>New York City</span>
+          <span>Nashville, TN</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TAGLINE ============ -->
+    <div class="cell tagline span2">
+      Building things. Some of them helpful. Some of them for fun.
+    </div>
+
+    <!-- ============ CURRENT ROLE ============ -->
+    <div class="label span2">Current Role</div>
+    <div class="cell role span2">
+      <p>
+        Leading strategy &amp; partnerships at
+        <a class="inline-link" href="https://raptormaps.com" target="_blank" rel="noopener">Raptor Maps</a>,
+        at the intersection of AI, robotics, and renewable energy.
+      </p>
+    </div>
+
+    <!-- ============ CURRENTLY BUILDING ============ -->
+    <div class="label span2">Currently Building (with friends)</div>
+
+    <a class="cell" href="https://thecolosseumapp.com" target="_blank" rel="noopener">
+      <span class="arrow">↗</span>
+      <p class="proj-name">The Colosseum</p>
+      <p class="sub">Live scores, contests, and communities.</p>
+    </a>
+
+    <a class="cell" href="https://monomythhealth.com" target="_blank" rel="noopener">
+      <span class="arrow">↗</span>
+      <p class="proj-name">Monomyth Health</p>
+      <p class="sub">A creatine-native brand built to support lasting focus and health.</p>
+    </a>
+
+    <!-- ============ CREATIVE ============ -->
+    <div class="label span2">Creative</div>
+    <a class="cell span2" href="https://www.youtube.com/watch?v=Mtyoh3q9m1s&t=1s" target="_blank" rel="noopener">
+      <span class="arrow">↗</span>
+      <p class="single-name">Mysterious Mix 1</p>
+    </a>
+
+    <!-- ============ GIVE ============ -->
+    <div class="label span2">Give</div>
+    <div class="cell give span2">
+      <p>Recently fell in love with the mission of Minds Matter, which helps students get through college.</p>
+      <a class="donate" href="https://www.mindsmatter.org/donate3/" target="_blank" rel="noopener">
+        <span class="sq"></span>Donate to Minds Matter
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>
